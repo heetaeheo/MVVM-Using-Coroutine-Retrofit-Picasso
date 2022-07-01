@@ -28,13 +28,12 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>(){
 
 
 
-    class MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val imageView = view.findViewById<ImageView>(R.id.iamgeVIew)
-        val textTitle =  view.findViewById<TextView>(R.id.tvTitle)
-        val textContent =  view.findViewById<TextView>(R.id.tvContent)
+    class MyViewHolder(private val binding: RecyclerListBinding) : RecyclerView.ViewHolder(binding.root){
+        val imageView = binding.iamgeVIew
+        val textTitle =  binding.tvTitle
+        val textContent =  binding.tvContent
 
         fun bind(data : RecyclerData){
-
             textTitle.text = data.name
             textContent.text = data.description
 
@@ -48,9 +47,10 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>(){
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_list,parent,false)
+        val binding = RecyclerListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
-        return MyViewHolder(view)
+
+        return MyViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
